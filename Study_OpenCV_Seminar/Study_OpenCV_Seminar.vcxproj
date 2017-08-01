@@ -143,14 +143,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Inverse.cpp" />
+    <ClCompile Include="callBack.cpp" />
+    <ClCompile Include="inverse.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="lena.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Inverse.h" />
+    <ClInclude Include="callBack.h" />
+    <ClInclude Include="inverse.h" />
     <ClInclude Include="opencv_set_3.2.0.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

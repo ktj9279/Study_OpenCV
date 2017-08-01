@@ -1,6 +1,9 @@
-#include "Inverse.h"
+#include "inverse.h"
 
 void inverse_main() {
+	///////////////////////////////////////////
+	/** Create Mat objects and read an image */
+	///////////////////////////////////////////
 	Mat src;
 	src = imread("lena.jpg", IMREAD_GRAYSCALE);
 	if (src.empty()) {
@@ -15,12 +18,12 @@ void inverse_main() {
 	Mat dst_iterator = src.clone();
 	Mat dst_at = src.clone();
 	
-	namedWindow("Original Image", WINDOW_NORMAL);
-	namedWindow("Inversed Image", WINDOW_NORMAL);
+	namedWindow("Original Image", WINDOW_AUTOSIZE);
+	namedWindow("Inversed Image", WINDOW_AUTOSIZE);
 
 
 	/////////////////////////////
-	/** Calculate Elapsed Time */
+	/** Calculate elapsed time */
 	/////////////////////////////
 	const int TIMES = 100;
 	cout << "< Elapsed Time >" << endl;
@@ -54,7 +57,10 @@ void inverse_main() {
 
 	imshow("Original Image", src);
 	imshow("Inversed Image", dst);
+	cout << "< Press any key on the image window to return the main menu. >" << endl << endl;
 	waitKey(0);
+
+	destroyAllWindows();
 }
 
 void inverse_ptr(Mat & img) {

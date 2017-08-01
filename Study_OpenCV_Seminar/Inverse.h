@@ -1,5 +1,5 @@
 #pragma once
-#include "opencv2\opencv.hpp"
+#include "opencv_set_3.2.0.h"
 
 using namespace std;
 using namespace cv;

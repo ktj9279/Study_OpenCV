@@ -18,7 +18,10 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Inverse.cpp">
+    <ClCompile Include="callBack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="inverse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -31,7 +34,10 @@
     <ClInclude Include="opencv_set_3.2.0.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Inverse.h">
+    <ClInclude Include="inverse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="callBack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
