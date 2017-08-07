@@ -87,6 +87,30 @@ void inverse_ptr(Mat & img) {
 	}
 }
 
+void inverse_ptr(Mat & img, Rect ROI) {
+	if (img.channels() == 1) {    // Grayscale
+		for (int row = ROI.y; row < ROI.y + ROI.height; row++) {
+			uchar* p = img.ptr<uchar>(row);    // 각 행의 데이터 시작 주소를 획득
+			for (int col = ROI.x; col < ROI.x + ROI.width; col++) {
+				p[col] = 255 - p[col];    // row번째 행에서 col번째 열의 픽셀 값을 반전
+			}
+		}
+	}
+	else if (img.channels() == 3) {    // BGR
+		for (int row = ROI.y; row < ROI.y + ROI.height; row++) {
+			Vec3b* p = img.ptr<Vec3b>(row);    // Vec3b : unsigned char 3개짜리 자료형
+			for (int col = ROI.x; col < ROI.x + ROI.width; col++) {
+				p[col][0] = 255 - p[col][0];
+				p[col][1] = 255 - p[col][1];
+				p[col][2] = 255 - p[col][2];
+			}
+		}
+	}
+	else {
+		cerr << "[Error] Undefined type of Mat to inverse." << endl << endl;;
+	}
+}
+
 void inverse_iterator(Mat & img) {
 	if (img.channels() == 1) {    // Grayscale
 		MatIterator_<uchar> it, end;

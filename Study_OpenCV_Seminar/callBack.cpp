@@ -21,9 +21,6 @@ void callBack_main() {
 
 	CallBackParam param;
 	
-	// Set mouse call back function on an window
-	setMouseCallback(vidWindow, onMouseTest, NULL);
-
 	cout << "< The List of the methods >" << endl
 		<< "[0] grab() and retrieve()" << endl
 		<< "[1] read() = grab() + retrieve()" << endl
@@ -33,6 +30,7 @@ void callBack_main() {
 	cin >> index;
 	cout << endl;
 
+
 	/////////////////////////////////////////////
 	/** Read and show every frame of the video */
 	/////////////////////////////////////////////
@@ -41,17 +39,14 @@ void callBack_main() {
 
 		switch (index) {
 		case 0:		// Method 1: grab() and retrieve()
-			if (!vid.grab()) {
-				if (cnt == 1) {
-					cerr << "[Error] Grab failed" << endl << endl;
-					cnt++;
+			if (vid.grab()) {
+				if (!vid.retrieve(frame)) {
+					cerr << "[Error] Retrieve failed" << endl << endl;
 				}
 			}
-			if (!vid.retrieve(frame)) {
-				if (cnt == 1) {
-					cerr << "[Error] Retrieve failed" << endl << endl;
-					cnt++;
-				}
+			else { 
+				cerr << "[Error] Grab failed" << endl << endl;
+				break;
 			}
 
 			break;
@@ -74,36 +69,36 @@ void callBack_main() {
 			break;
 		}
 
+		// Draw image
+		if (param.check == true) {    // Inverse image
+			inverse_ptr(frame, param.ROI);
+		}
+		else if (param.drag == true || param.updated == true) {    // Draw rectangle
+			rectangle(frame, param.pt1, param.pt2, Scalar(0, 0, 255), 1);
+			// inverse_ptr(frame, Rect(param.pt1, param.pt2));
+		}
+
+		param.img = frame;
+
+		// Set mouse call back function on an window
+		setMouseCallback(vidWindow, onMouseRect, &param);
+
 		imshow(vidWindow, frame);
+
 		if (cnt == 1) {
-			cout << "< Press ESC key to disconnect the camera >" << endl << endl;
+			cout << "< Drag the mouse on the video window to select a ROI. >" << endl;
+			cout << "< Click the right mouse button to inverse the video. >" << endl;
+			cout << "< Press ESC key on the video window to return the main menu. >" << endl << endl;
 			cnt++;
 		}
 		// 한 프레임이 넘어가는 속도를 계산하여 waitKey()의 인수로 넘긴다.
-		if (waitKey(1000.f / FPS) == 27) {
+		if (waitKey((int)(1000.f / FPS)) == 27) {
 			// Release mouse call back function
 			setMouseCallback(vidWindow, NULL, NULL);
 			destroyAllWindows();
 
-			vid.read(param.img); param.drag = false; param.updated = false; param.check = false;
-			namedWindow(imgWindow, WINDOW_AUTOSIZE);
-			imshow(imgWindow, param.img);
-			
-			while (true) {
-				setMouseCallback(imgWindow, onMouseRect, &param);
-
-				cout << "< Drag the mouse on the image window. >" << endl << endl;
-				cout << "< Press any key on the image window to return the main menu. >" << endl << endl;
-				if (waitKey(0)) {
-					setMouseCallback(imgWindow, NULL, NULL);
-					destroyAllWindows();
-
-					break;
-				}
-			}
-
 			break;
-		}		
+		}
 	}
 
 	vid.release();
@@ -181,36 +176,43 @@ void onMouseTest(int event, int x, int y, int flags, void* param)
 void onMouseRect(int event, int x, int y, int flags, void* param) {
 	CallBackParam* p = (CallBackParam*)param;
 
-	if (event == EVENT_LBUTTONDOWN) {
+	if (event == CV_EVENT_LBUTTONDOWN) {
 		p->pt1.x = x;
 		p->pt1.y = y;
 		p->pt2 = p->pt1;
 		p->drag = true;
 	}
 
-	if (event == EVENT_LBUTTONUP) {
-		int w = x - p->pt1.x;
-		int h = y - p->pt1.y;
-		p->ROI.x = p->pt1.x;
-		p->ROI.y = p->pt1.y;
-		p->ROI.width = abs(w);
-		p->ROI.height = abs(h);
+	if (event == CV_EVENT_LBUTTONUP) {
+		p->ROI.x = x < p->pt1.x ? x : p->pt1.x;
+		p->ROI.y = y < p->pt1.y ? y : p->pt1.y;
+		p->ROI.width = abs(x - p->pt1.x);
+		p->ROI.height = abs(y - p->pt1.y);
 		p->drag = false;
 
-		if (w >= 10 && h >= 10)
+		if (p->ROI.width >= 10 && p->ROI.height >= 10)
 		{
 			p->updated = true;
-			p->check = true;
 		}
 	}
 
 	if (p->drag && event == CV_EVENT_MOUSEMOVE) {
 		if (p->pt2.x != x || p->pt2.y != y) {
-			Mat imgRect = p->img.clone();
 			p->pt2.x = x;
 			p->pt2.y = y;
-			rectangle(imgRect, p->pt1, p->pt2, Scalar(0, 0, 255), 1);
-			imshow("Image Viwer", imgRect);
+			// Mat imgRect = p->img.clone();
+			// rectangle(imgRect, p->pt1, p->pt2, Scalar(0, 0, 255), 1);
+			// imshow("Video Viwer", imgRect);
 		}
+	}
+
+	if (p->updated == true && event == CV_EVENT_RBUTTONDOWN) {
+		// Mat imgInversed = p->img.clone();
+		// inverse_ptr(imgInversed, p->ROI);
+		// imshow("Video Viwer", imgInversed);
+		if (p->check == true) {
+			p->updated = false;
+		}
+		p->check = !p->check;
 	}
 }
