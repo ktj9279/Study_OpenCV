@@ -75,7 +75,6 @@ void callBack_main() {
 		}
 		else if (param.drag == true || param.updated == true) {    // Draw rectangle
 			rectangle(frame, param.pt1, param.pt2, Scalar(0, 0, 255), 1);
-			// 아래 주석을 해제하면, 마우스 드래그로 지정된 영역이 실시간으로 반전된다.
 			// inverse_ptr(frame, Rect(param.pt1, param.pt2));
 		}
 
