@@ -75,12 +75,13 @@ void callBack_main() {
 		}
 		else if (param.drag == true || param.updated == true) {    // Draw rectangle
 			rectangle(frame, param.pt1, param.pt2, Scalar(0, 0, 255), 1);
+			// 아래 주석을 해제하면, 마우스 드래그로 지정된 영역이 실시간으로 반전된다.
 			// inverse_ptr(frame, Rect(param.pt1, param.pt2));
 		}
 
 		param.img = frame;
 
-		// Set mouse call back function on an window
+		// Set mouse call back function on a window
 		setMouseCallback(vidWindow, onMouseRect, &param);
 
 		imshow(vidWindow, frame);

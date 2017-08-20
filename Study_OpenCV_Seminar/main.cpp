@@ -2,6 +2,7 @@
 #include "opencv_set_3.2.0.h"
 #include "inverse.h"
 #include "callBack.h"
+#include "templateMatching.h"
 
 using namespace std;
 using namespace cv;
@@ -16,6 +17,7 @@ int main(int argc, char* argv[])
 		cout << "< The List of the Examples >" << endl
 			<< "[0] Mat and inverse image" << endl
 			<< "[1] VideoCapture and call back function" << endl
+			<< "[2] Template matching" << endl
 			<< "[5221] Quit the program" << endl
 			<< endl;
 		cout << "Enter the number of example you want to run. : ";
@@ -28,6 +30,9 @@ int main(int argc, char* argv[])
 			break;
 		case 1:		// VideoCapture and Call Back Function
 			callBack_main();
+			break;
+		case 2:
+			templateMatching_main();
 			break;
 		case 5221:	// Quit the Program
 			return 0;

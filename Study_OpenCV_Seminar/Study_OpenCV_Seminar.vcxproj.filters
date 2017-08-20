@@ -24,6 +24,9 @@
     <ClCompile Include="inverse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="templateMatching.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="lena.jpg">
@@ -38,6 +41,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="callBack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="templateMatching.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
