@@ -80,7 +80,7 @@ void callBack_main() {
 
 		param.img = frame;
 
-		// Set mouse call back function on an window
+		// Set mouse call back function on a window
 		setMouseCallback(vidWindow, onMouseRect, &param);
 
 		imshow(vidWindow, frame);

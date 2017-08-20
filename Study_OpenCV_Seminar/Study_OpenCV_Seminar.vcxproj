@@ -146,6 +146,7 @@
     <ClCompile Include="callBack.cpp" />
     <ClCompile Include="inverse.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="templateMatching.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="lena.jpg" />
@@ -154,6 +155,7 @@
     <ClInclude Include="callBack.h" />
     <ClInclude Include="inverse.h" />
     <ClInclude Include="opencv_set_3.2.0.h" />
+    <ClInclude Include="templateMatching.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
