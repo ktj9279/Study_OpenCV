@@ -75,6 +75,7 @@ void callBack_main() {
 		}
 		else if (param.drag == true || param.updated == true) {    // Draw rectangle
 			rectangle(frame, param.pt1, param.pt2, Scalar(0, 0, 255), 1);
+			// 아래 주석을 해제하면, 마우스 드래그로 지정된 영역이 실시간으로 반전된다.
 			// inverse_ptr(frame, Rect(param.pt1, param.pt2));
 		}
 
@@ -176,14 +177,14 @@ void onMouseTest(int event, int x, int y, int flags, void* param)
 void onMouseRect(int event, int x, int y, int flags, void* param) {
 	CallBackParam* p = (CallBackParam*)param;
 
-	if (event == CV_EVENT_LBUTTONDOWN) {
+	if (p->check == false && event == CV_EVENT_LBUTTONDOWN) {
 		p->pt1.x = x;
 		p->pt1.y = y;
 		p->pt2 = p->pt1;
 		p->drag = true;
 	}
 
-	if (event == CV_EVENT_LBUTTONUP) {
+	if (p->check == false && event == CV_EVENT_LBUTTONUP) {
 		p->ROI.x = x < p->pt1.x ? x : p->pt1.x;
 		p->ROI.y = y < p->pt1.y ? y : p->pt1.y;
 		p->ROI.width = abs(x - p->pt1.x);
@@ -197,13 +198,11 @@ void onMouseRect(int event, int x, int y, int flags, void* param) {
 	}
 
 	if (p->drag && event == CV_EVENT_MOUSEMOVE) {
-		if (p->pt2.x != x || p->pt2.y != y) {
-			p->pt2.x = x;
-			p->pt2.y = y;
-			// Mat imgRect = p->img.clone();
-			// rectangle(imgRect, p->pt1, p->pt2, Scalar(0, 0, 255), 1);
-			// imshow("Video Viwer", imgRect);
-		}
+		p->pt2.x = x;
+		p->pt2.y = y;
+		// Mat imgRect = p->img.clone();
+		// rectangle(imgRect, p->pt1, p->pt2, Scalar(0, 0, 255), 1);
+		// imshow("Video Viwer", imgRect);
 	}
 
 	if (p->updated == true && event == CV_EVENT_RBUTTONDOWN) {

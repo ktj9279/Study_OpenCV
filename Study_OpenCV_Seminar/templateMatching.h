@@ -1,7 +1,8 @@
+// http://docs.opencv.org/3.2.0/de/da9/tutorial_template_matching.html
+
 #pragma once
 #include "opencv_set_3.2.0.h"
 #include "callBack.h"
-#include <iostream>
 
 using namespace std;
 using namespace cv;

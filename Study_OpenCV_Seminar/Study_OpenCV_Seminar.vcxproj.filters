@@ -27,6 +27,9 @@
     <ClCompile Include="templateMatching.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CannyEdgeDetector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="lena.jpg">
@@ -44,6 +47,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="templateMatching.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CannyEdgeDetector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

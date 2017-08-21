@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="callBack.cpp" />
+    <ClCompile Include="CannyEdgeDetector.cpp" />
     <ClCompile Include="inverse.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="templateMatching.cpp" />
@@ -153,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="callBack.h" />
+    <ClInclude Include="CannyEdgeDetector.h" />
     <ClInclude Include="inverse.h" />
     <ClInclude Include="opencv_set_3.2.0.h" />
     <ClInclude Include="templateMatching.h" />
